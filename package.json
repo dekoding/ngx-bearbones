@@ -1,0 +1,33 @@
+{
+  "name": "ngx-bearbones",
+  "version": "0.0.1",
+  "description": "A set of unstyled, easily themed widgets for Angular",
+  "license": "MIT",
+  "private": true,
+  "peerDependencies": {
+    "@angular/animations": "^5.2.0",
+    "@angular/common": "^5.2.0",
+    "@angular/compiler": "^5.2.0",
+    "@angular/core": "^5.2.0",
+    "@angular/forms": "^5.2.0",
+    "@angular/http": "^5.2.0",
+    "@angular/platform-browser": "^5.2.0",
+    "@angular/platform-browser-dynamic": "^5.2.0",
+    "@angular/router": "^5.2.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.5.6",
+    "zone.js": "^0.8.19"
+  },
+  "homepage": "https://github.com/GoodDamon/ngx-bearbones",
+  "bugs": {
+    "url": "https://github.com/GoodDamon/ngx-bearbones/issues"
+  },
+  "main": "bundles/ngx-bearbones.umd.js",
+  "module": "esm5/ngx-bearbones.js",
+  "es2015": "esm2015/ngx-bearbones.js",
+  "typings": "ngx-bearbones.d.ts",
+  "metadata": "ngx-bearbones.metadata.json",
+  "dependencies": {
+    "tslib": "^1.7.1"
+  }
+}
