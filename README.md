@@ -2,6 +2,8 @@
 
 A project to create bare-bones (get it?) Angular widgets ready to be used with any CSS framework. (Bootstrap, Material, SemanticUI, etc.)
 
+**Note**: The ngx-bearbones package currently only contains two completed widgets, a drag-and-drop directive and a sortable directive. I'm working as fast as I can to add more!
+
 ## Table of contents
 1. [Bearbones Manifesto](#manifesto)
 2. [Installation instructions](#installation-instructions)
@@ -67,7 +69,7 @@ Or with custom classes...
 </ul>
 ```
 
-## Component
+### Component
 
 ```typescript
 
@@ -82,6 +84,30 @@ orderChanged(event: any) {
     this.myItems.splice(newPosition, 0, this.myItems.splice(draggedItem, 1)[0]);
 }
 ```
+
+## Documentation
+
+### Drag and drop
+
+The drag-and-drop component consists of two directives, a dropzone target and a dropper. Both target and dropper can be any HTML element; I've intentionally made it as unrestrictive as possible, but that means it's up to you to make sure you haven't accidentally created a `<li>` dropper and a `<div>` drop target on the same page.
+
+#### Example with custom classes
+
+```HTML
+<ul>
+    <li bbdropzone bbdropzoneClass="dropzone" bbdropzoneHoverClass="dropzone-hover">
+        <div bbdropper bbdropperClass="dropper" bbholdingClass="dropper-holding">
+            Styled dropper
+        </div>
+    </li>
+    <li bbdropzone bbdropzoneClass="dropzone" bbdropzoneHoverClass="dropzone-hover"></li>
+    <li bbdropzone bbdropzoneClass="dropzone" bbdropzoneHoverClass="dropzone-hover"></li>
+</ul>
+```
+
+### Sortable
+
+(See example above)
 
 ## Troubleshooting
 
