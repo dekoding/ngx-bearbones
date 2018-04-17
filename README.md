@@ -7,6 +7,7 @@ A project to create bare-bones (get it?) Angular widgets ready to be used with a
 ## Table of contents
 1. [Bearbones Manifesto](#manifesto)
 2. [Installation instructions](#installation-instructions)
+3. [Documentation](#documentation)
 3. [Troubleshooting](#troubleshooting)
 4. [Contributing](#contribution)
 
