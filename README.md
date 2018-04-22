@@ -11,7 +11,7 @@ A project to create bare-bones (get it?) Angular widgets ready to be used with a
 3. [Troubleshooting](#troubleshooting)
 4. [Contributing](#contribution)
 
-## Manifesto
+## Bearbones Manifesto
 
 There are dozens of Angular widget libraries for multiple CSS frameworks, but there are very few entirely unthemed, functional widgets that allow you to easily implement your own custom styles or test different CSS frameworks without extensively rewriting your components for them.
 
@@ -22,7 +22,7 @@ Enter **Bearbones**, which gives you complete widgets that are not integrated wi
 * Test components without flashy styles getting in the way, while still being fully functional.
 * Apply **Bearbones** directives to nearly any HTML element, instead of being locked into specific templates.
 
-## Installation
+## Installation instructions
 
 Install `ngx-bearbones` from `npm`:
 ```bash
@@ -31,8 +31,7 @@ npm install ngx-bearbones --save
 
 Import the Bearbones module and service:
 ```
-import { BearbonesModule } from 'ngx-bearbones';
-import { BearbonesService } from 'ngx-bearbones';
+import { BearbonesModule, BearbonesService } from 'ngx-bearbones';
 
 @NgModule({
   ...
@@ -42,9 +41,15 @@ import { BearbonesService } from 'ngx-bearbones';
 })
 ```
 
-Use Bearbones widgets in your components. For example, a sortable widget that binds a handler to the `orderChanged` event to reorder an array:
+## Documentation
 
-### Template
+Use Bearbones widgets in your components.
+
+### Sortable
+
+A sortable widget emits an event `orderChanged` whenever an item has been moved:
+
+#### Template
 
 ```HTML
 <ul bbsortable="mysortable" (orderChanged)="orderChanged($event)">
@@ -52,7 +57,7 @@ Use Bearbones widgets in your components. For example, a sortable widget that bi
 </ul>
 ```
 
-### Component
+#### Component
 
 ```typescript
 orderChanged(event: any) {
@@ -63,14 +68,14 @@ orderChanged(event: any) {
 
 Or with custom classes...
 
-### Template
+#### Template
 ```HTML
 <ul bbsortable="mysortable" (orderChanged)="orderChanged($event)" [bboptions]="myOptions">
     <li *ngFor="let item of myItems">{{item.name}}</li>
 </ul>
 ```
 
-### Component
+#### Component
 
 ```typescript
 
@@ -85,8 +90,6 @@ orderChanged(event: any) {
     this.myItems.splice(newPosition, 0, this.myItems.splice(draggedItem, 1)[0]);
 }
 ```
-
-## Documentation
 
 ### Drag and drop
 
@@ -105,10 +108,6 @@ The drag-and-drop component consists of two directives, a dropzone target and a 
     <li bbdropzone bbdropzoneClass="dropzone" bbdropzoneHoverClass="dropzone-hover"></li>
 </ul>
 ```
-
-### Sortable
-
-(See example above)
 
 ## Troubleshooting
 

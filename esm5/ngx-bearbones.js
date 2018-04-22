@@ -272,6 +272,9 @@ BearbonesModule.decorators = [
                     BBSortableDirective,
                     BBDropzoneDirective,
                     BBDropperDirective
+                ],
+                providers: [
+                    BearbonesService
                 ]
             },] },
 ];
