@@ -1,7 +1,7 @@
 {
   "name": "ngx-bearbones",
   "description": "A project to create bare-bones Angular widgets ready to be used with any CSS framework.",
-  "version": "0.0.4-test5",
+  "version": "0.0.4-test6",
   "license": "MIT",
   "private": false,
   "peerDependencies": {

@@ -29,27 +29,35 @@ Install `ngx-bearbones` from `npm`:
 npm install ngx-bearbones --save
 ```
 
-Import the Bearbones module and service:
+Import the Bearbones module:
 ```
-import { BearbonesModule, BearbonesService } from 'ngx-bearbones';
+import { BearbonesModule } from 'ngx-bearbones';
 
 @NgModule({
   ...
-  imports: [ BearbonesModule, ... ],
-  providers: [ BearbonesService, ... ]
+  imports: [ BearbonesModule, ... ]
   ...
 })
 ```
 
 ## Documentation
 
-Use Bearbones widgets in your components.
+Use ngx-bearbones widgets in your components.
 
 ### Sortable
 
-A sortable widget emits an event `orderChanged` whenever an item has been moved:
+A sortable widget that emits an event `orderChanged` whenever an item in a list of items (usually an array) has been dragged to a new position. The event object consists of just two fields, both of which are numbers:
 
-#### Template
+```typescript
+{
+    draggedItem, // The index of the item you are dragging
+    newPosition  // The item's new position - i.e., the drop target's index
+}
+```
+
+**Note**: The "bbsortable" directive does not reposition the elements for you, which is by design. In order to accomplish maximum compatibility with any CSS framework and development style, it is up to you decide what to do with the positioning information contained in the event. See an example of reordering items in an array that is accessed with `*ngFor` from a template:
+
+#### Example Template
 
 ```HTML
 <ul bbsortable="mysortable" (orderChanged)="orderChanged($event)">
@@ -57,16 +65,22 @@ A sortable widget emits an event `orderChanged` whenever an item has been moved:
 </ul>
 ```
 
-#### Component
+#### Example Component
 
 ```typescript
+myItems = [
+    { name: 'Item 1' },
+    { name: 'Item 2' },
+    { name: 'Item 3' }
+];
+
 orderChanged(event: any) {
     const { draggedItem, newPosition } = event;
     this.myItems.splice(newPosition, 0, this.myItems.splice(draggedItem, 1)[0]);
 }
 ```
 
-Or with custom classes...
+Example using custom classes:
 
 #### Template
 ```HTML
@@ -78,6 +92,11 @@ Or with custom classes...
 #### Component
 
 ```typescript
+myItems = [
+    { name: 'Item 1' },
+    { name: 'Item 2' },
+    { name: 'Item 3' }
+];
 
 myOptions = {
     restingClass: 'dropzone',
@@ -95,7 +114,7 @@ orderChanged(event: any) {
 
 The drag-and-drop component consists of two directives, a dropzone target and a dropper. Both target and dropper can be any HTML element; I've intentionally made it as unrestrictive as possible, but that means it's up to you to make sure you haven't accidentally created a `<li>` dropper and a `<div>` drop target on the same page.
 
-#### Example with custom classes
+#### Example
 
 ```HTML
 <ul>
