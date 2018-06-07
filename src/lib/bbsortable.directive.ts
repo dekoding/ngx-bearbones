@@ -12,7 +12,13 @@ export class BBSortableDirective implements OnInit, AfterContentInit {
     @Input('bbsortable') name: string;
     @Input('bboptions') options: any;
 
+    // Event emitters
     @Output() orderChanged = new EventEmitter();
+    @Output() bbstart = new EventEmitter();
+    @Output() bbend = new EventEmitter();
+    @Output() bbenter = new EventEmitter();
+    @Output() bbleave = new EventEmitter();
+    @Output() bbdrop = new EventEmitter();
 
     draggedItem:number;
     dropTarget:any;
@@ -29,18 +35,20 @@ export class BBSortableDirective implements OnInit, AfterContentInit {
 
     // Dropper listeners
     @HostListener('dragstart', ['$event']) dragstart(event) {
+        event.dataTransfer.setData('text/plain', event.target['bbvalue'] || null);
         if (this.options.holdingClass !== undefined) {
             this.renderer.addClass(event.target, this.options.holdingClass);
         }
 
         this.draggedItem = +event.target['bbsortable-index'];
-        event.dataTransfer.setData('text/plain', event.target['bbvalue'] || null);
+        this.bbstart.emit(this.draggedItem);
     }
 
     @HostListener('dragend', ['$event']) dragend(event) {
         if (this.options.holdingClass !== undefined) {
             this.renderer.removeClass(event.target, this.options.holdingClass);
         }
+        this.bbend.emit(this.draggedItem);
     }
 
     // Dropzone listeners
@@ -56,6 +64,7 @@ export class BBSortableDirective implements OnInit, AfterContentInit {
                 this.updateDropzoneClass(event, this.options.hoverClass, true);
             }
         }
+        this.bbenter.emit(+event.target['bbsortable-index']);
     }
 
     @HostListener('dragleave', ['$event']) dragleave(event:any) {
@@ -66,6 +75,7 @@ export class BBSortableDirective implements OnInit, AfterContentInit {
                 this.updateDropzoneClass(event, this.options.hoverClass, false);
             }
         }
+        this.bbleave.emit(+event.target['bbsortable-index']);
     }
 
     @HostListener('drop', ['$event']) drop(event:any) {
@@ -116,7 +126,7 @@ export class BBSortableDirective implements OnInit, AfterContentInit {
                     }
                 }
             }
-
+            this.bbdrop.emit(+newPosition);
             this.orderChanged.emit({ draggedItem, newPosition });
         }
     }

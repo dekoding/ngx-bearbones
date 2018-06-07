@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, HostListener, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Renderer2, HostListener, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { BearbonesService } from './bearbones.service';
 
 @Directive({
@@ -24,19 +24,28 @@ export class BBDropperDirective implements OnInit {
     @Input('bbdropper') name: string;
     @Input('bbdropperClass') bbdropperClass: string;
     @Input('bbholdingClass') bbholdingClass: string;
-    @Input('bbdata') bbdata:any;
+    @Input('bbpayload') bbpayload:string;
+    @Input('bbdropperId') bbdropperId: string;
+    @Output() bbstart = new EventEmitter();
+    @Output() bbend = new EventEmitter();
 
     @HostListener('dragstart', ['$event']) dragstart(event:any) {
         if (this.bbholdingClass !== undefined) {
             this.renderer.addClass(this.el.nativeElement, this.bbholdingClass);
         }
-        event.dataTransfer.setData('text/plain', this.bbdata || null);
+        event.dataTransfer.setData('text/plain', this.bbpayload || null);
         this.bbService.el = this.el;
+        if(this.bbdropperId) {
+            this.bbstart.emit(this.bbdropperId);
+        }
     }
 
     @HostListener('dragend') dragend() {
         if (this.bbholdingClass !== undefined) {
             this.renderer.removeClass(this.el.nativeElement, this.bbholdingClass);
+        }
+        if(this.bbdropperId) {
+            this.bbstart.emit(this.bbdropperId);
         }
     }
 }

@@ -1,0 +1,60 @@
+.dropzone {
+    list-style: none;
+    width: 200px;
+    background: purple;
+    outline: 2px solid black;
+    position: relative;
+    margin: 5px;
+    height: 30px;
+}
+
+.dropzone-hover {
+    background: orange !important;
+}
+
+.dropper {
+    position: absolute;
+    text-align: center;
+    left: 3px;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    background: white;
+    cursor: grab;
+}
+
+.dropper-holding {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.dz2 {
+    list-style: none;
+    width: 200px;
+    background: green;
+    outline: 2px solid black;
+    position: relative;
+    margin: 5px;
+    height: 30px;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.green {
+    color: green;
+}
+
+.orange {
+    color: orange;
+}
+
+.list-group-item {
+    height: 50px;
+    cursor: grab;
+}

@@ -16,16 +16,19 @@ export class BBTabDirective implements OnInit {
     @Input('bbactive') active: boolean;
     @Input('bbactiveclass') activeClass: string;
 
-    @Output() clicked = new EventEmitter();
+    @Output() bbshowstart = new EventEmitter();
+    @Output() bbshowend = new EventEmitter();
 
     ngOnInit() {
         if (this.active) {
+            this.bbshowstart.emit(this.tabName);
             this.bbService.tabsets[this.tabset] = {};
             this.setActive();
         }
     }
 
     @HostListener('click', ['$event']) onClick(event) {
+        this.bbshowstart.emit(this.tabName);
         event.preventDefault();
         this.setActive();
     }
@@ -38,7 +41,12 @@ export class BBTabDirective implements OnInit {
         let activeClassTarget = 'none';
 
         // Find out if this element, the parent element, or child elements have an active class set.
-        // Order of precedence: Parent, child, tab.
+        // Order of precedence: Parent, tab, child.
+        if (parentElement.hasAttribute('bbactiveclass')) {
+            activeClassElement = 'parent';
+            activeClassTarget = parentElement.attributes['bbtarget'].value;
+        }
+
         if (this.activeClass) {
             activeClassElement = 'tab';
         }
@@ -47,11 +55,6 @@ export class BBTabDirective implements OnInit {
             if (child.hasAttribute('bbactiveclass')) {
                 activeClassElement = 'child';
             }
-        }
-
-        if (parentElement.hasAttribute('bbactiveclass')) {
-            activeClassElement = 'parent';
-            activeClassTarget = parentElement.attributes['bbtarget'].value;
         }
 
         // If the tab element itself has it set, apply it.
@@ -103,6 +106,7 @@ export class BBTabDirective implements OnInit {
             this.renderer.setProperty(this.el.nativeElement, 'bbactive', true);
         }
         this.bbService.tabsets[this.tabset]['activeTab'] = this.tabName;
+        this.bbshowend.emit(this.tabName);
     }
 }
 

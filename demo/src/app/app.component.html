@@ -1,0 +1,331 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>NGX-BearBones Demo</h3>
+            <p class="lead">
+                This page demonstrates unstyled, custom-styled and Bootstrap-styled versions of common widgets.
+            </p>
+            <div class="card mb-5 bg-light" style="width: 100%;">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Drag-and-drop
+                    </h3>
+                    <p>
+                        The BearBones drag-and-drop widgets consist of two directives, one for "dropzones" and one for "droppers."
+                    </p>
+                    <p>
+                        Dropzones and droppers must always be assigned the same value for the "bbdropzone" and "bbdropper"
+                        attributes, or the dropper will not identify the dropzone as a valid drop target. For example, if your
+                        dropper's "bbdropper" attribute is set to "dragdrop1", the "bbdropzone" attribute on a dropzone must
+                        also be "dragdrop1" for it to be a valid target.
+                    </p>
+                    <p>
+                        Droppers can be assigned a payload ("bbpayload"), which consists of a string that will be emitted by
+                        whichever valid dropzone it is dropped on.
+                    </p>
+                    <p>
+                        You may also set a Dropzone Identifier ("bbdropzoneId") to uniquely identify individual dropzones. If
+                        you do this, you can take advantage of event emitters for dropzones (see below). If "bbdropzoneId"
+                        is not set, dropzones will not emit events, with the exception of the "bbdata" event.
+                    </p>
+                    <p>
+                        Similarly, Dropper Identifiers ("bbdropperId") can be used to enable event emitters for droppers.
+                    </p>
+                    <p>
+                        <strong>Important Note</strong>: Droppers don't have to start inside a dropzone.
+                    </p>
+                    <h4>Event Emitters (Dropzone):</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>bbenter</td>
+                                <td>Emitted when a dragged item enters a valid target area</td>
+                                <td>Dropzone Identifier: <em>string</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbleave</td>
+                                <td>Emitted when a dragged item leaves a valid target area</td>
+                                <td>Dropzone Identifier: <em>string</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbdrop</td>
+                                <td>Emitted when a dragged item is dropped into a valid target area</td>
+                                <td>Dropzone Identifier: <em>string</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbdata</td>
+                                <td>Emitted when a dragged item with a payload is dropped into a valid target area</td>
+                                <td>Payload: <em>string</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4>Event Emitters (Dropper):</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>bbstart</td>
+                                <td>Emitted when dragging an item starts</td>
+                                <td>Dropper Identifier: <em>string</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbend</td>
+                                <td>Emitted when a draggable item is released, regardless of where it is released</td>
+                                <td>Dropper Identifier: <em>string</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4>Examples:</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <h5>Unstyled, with payload</h5>
+                            <ul>
+                                <li bbdropzone="unstyled" (bbdata)="logPayload($event)">
+                                    <div bbdropper="unstyled" bbpayload="test data">
+                                        Unstyled dropper
+                                    </div>
+                                </li>
+                                <li bbdropzone="unstyled" (bbdata)="logPayload($event)"></li>
+                                <li bbdropzone="unstyled" (bbdata)="logPayload($event)"></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h5>Custom Styled</h5>
+                            <ul>
+                                <li bbdropzone="custom" class="dropzone" bbdropzoneHoverClass="dropzone-hover">
+                                    <div bbdropper="custom"class="dropper" bbholdingClass="dropper-holding">
+                                        Styled dropper
+                                    </div>
+                                </li>
+                                <li bbdropzone="custom" class="dropzone" bbdropzoneHoverClass="dropzone-hover"></li>
+                                <li bbdropzone="custom" class="dropzone" bbdropzoneHoverClass="dropzone-hover"></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h5>Boostrap Styled</h5>
+                            <ul class="list-group">
+                                <li bbdropzone="bootstrap" class="list-group-item" bbdropzoneHoverClass="list-group-item-warning">
+                                    <div bbdropper="bootstrap">
+                                        Bootstrap dropper
+                                    </div>
+                                </li>
+                                <li bbdropzone="bootstrap" class="list-group-item" bbdropzoneHoverClass="list-group-item-warning"></li>
+                                <li bbdropzone="bootstrap" class="list-group-item" bbdropzoneHoverClass="list-group-item-warning"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-5 bg-light" style="width: 100%;">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Sortable
+                    </h3>
+                    <p>
+                        Similar, but not identical, to the drag-and-drop widgets, the sortable widget acts as a container
+                        for re-orderable items. Since you are placing elements where they exist already, the sortable does NOT
+                        actually do the work of re-ordering. Instead, it emits an event when a new ordering has been made,
+                        and it is up to the component logic to sort the associated array.
+                    </p>
+                    <h4>Event Emitters:</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>bbstart</td>
+                                <td>Emitted when sorting an item starts</td>
+                                <td>Index of selected item: <em>number</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbend</td>
+                                <td>Emitted when a sortable item is released, regardless of whether it is released in a new location</td>
+                                <td>Index of selected item: <em>number</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbenter</td>
+                                <td>Emitted when a sortable item is dragged into a valid target area</td>
+                                <td>Index of target area: <em>number</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbleave</td>
+                                <td>Emitted when a sortable item is dragged out of a valid target area</td>
+                                <td>Index of target area: <em>number</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbdrop</td>
+                                <td>Emitted when a sortable item is dropped into a valid target area</td>
+                                <td>Index of target area: <em>number</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>orderChanged</strong></td>
+                                <td>Emitted when a sortable's order has been changed by a successful drop</td>
+                                <td>Object: &#123; draggedItem:<em>number</em>, newPosition:<em>number</em> &#125;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4>Examples:</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <h5>Unstyled, emits bbstart</h5>
+                            <ul bbsortable="unstyled" (orderChanged)="orderChangedUnstyled($event)" (bbstart)="logStart($event)" (bbend)="logEnd($event)">
+                                <li *ngFor="let item of items">
+                                    {{item}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h5>Custom Styled</h5>
+                            <ul bbsortable="styled" (orderChanged)="orderChangedCustomStyled($event)" [bboptions]="sortOptionsFruit">
+                                <li *ngFor="let fruit of fruits" [class]="fruit.color">
+                                    <span class="dropper">{{fruit.name}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h5>Bootstrap Styled</h5>
+                            <ul class="list-group" bbsortable="bootstrap" (orderChanged)="orderChangedBootstrap($event)" [bboptions]="sortOptionsCars">
+                                <li *ngFor="let car of cars">
+                                    {{car}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-5 bg-light" style="width: 100%;">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Tabs
+                    </h3>
+                    <p>
+                        BearBones tabs allow you to display tabular data. It consists of two directives, bbtab and bbtabcontent,
+                        which can be placed anywhere on the page independently of one another - i.e., without needing a container
+                        for any particular part of the tab. In addition, it is also capable of accepting custom classes for
+                        active tabs from the tab, the first child element of the tab, or the parent of the tab.
+                    </p>
+                    <p>
+                        NOTE: Custom classes take precedence as follows (in ascending order):
+                    </p>
+                    <ol>
+                        <li>Parent</li>
+                        <li>Tab</li>
+                        <li>Child</li>
+                    </ol>
+                    <p>
+                        For example, if you have a custom active class set for a child, and one set at the parent, the child
+                        class will be applied.
+                    </p>
+                    <p>
+                        All tabsets need to be initialized with a default open tab. Use bbactive=true to set a tab to open.
+                    </p>
+                    <h4>Event Emitters:</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>bbshowstart</td>
+                                <td>Emitted when a tab is selected</td>
+                                <td>Tab name: <em>string</em></td>
+                            </tr>
+                            <tr>
+                                <td>bbshowend</td>
+                                <td>Emitted when a tab's content is fully visible</td>
+                                <td>Tab name: <em>string</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4>Examples:</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <h4>No styling</h4>
+                            <div>
+                                <nav>
+                                    <a bbtab="tab1" bbactive="true" bbtabset="tabset1">
+                                        Tab 1
+                                    </a>
+                                    <a bbtab="tab2" bbtabset="tabset1">
+                                        Tab 2
+                                    </a>
+                                </nav>
+                                <br/>
+                                <div bbtabcontent="tab1" bbtabset="tabset1">
+                                    Tab 1 contents
+                                </div>
+
+                                <div bbtabcontent="tab2" bbtabset="tabset1">
+                                    Tab 2 contents
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+
+                            <h3>Tabs with Bootstrap styling:</h3>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item" bbtab="tab1" bbactive="true" bbtabset="tabset2">
+                                    <a href="#" class="nav-link" bbactiveclass="active">Tab 1</a>
+                                </li>
+                                <li class="nav-item" bbtab="tab2" bbtabset="tabset2">
+                                    <a href="#" class="nav-link" bbactiveclass="active">Tab 2</a>
+                                </li>
+                            </ul>
+
+                            <div bbtabcontent="tab1" bbtabset="tabset2">
+                                Tab 1 contents
+                            </div>
+
+                            <div bbtabcontent="tab2" bbtabset="tabset2">
+                                Tab 2 contents
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h4>Boostrap pill styling, active class set at parent, with event emitters</h4>
+                            <ul class="nav nav-pills" bbactiveclass="active" bbtarget="child">
+                                <li class="nav-item" bbtab="tab1" bbtabset="tabset3" (bbshowstart)="logStart($event)" (bbshowend)="logEnd($event)">
+                                    <a href="#" class="nav-link">Tab 1</a>
+                                </li>
+                                <li class="nav-item" bbtab="tab2" bbactive="true" bbtabset="tabset3" (bbshowstart)="logStart($event)" (bbshowend)="logEnd($event)">
+                                    <a href="#" class="nav-link">Tab 2</a>
+                                </li>
+                            </ul>
+
+                            <div bbtabcontent="tab1" bbtabset="tabset3">
+                                Tab 1 contents
+                            </div>
+
+                            <div bbtabcontent="tab2" bbtabset="tabset3">
+                                Tab 2 contents
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
