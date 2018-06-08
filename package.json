@@ -1,6 +1,6 @@
 {
   "name": "ngx-bearbones",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A project to create bare-bones Angular widgets ready to be used with any CSS framework. (Bootstrap, Material, SemanticUI, etc.)",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
