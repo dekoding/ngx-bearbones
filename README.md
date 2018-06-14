@@ -1,3 +1,4 @@
+[!Logo](https://raw.githubusercontent.com/dekoding/ngx-bearbones/Adding-logo/bearbones.png)
 # Ngx-Bearbones
 
 A project to create bare-bones Angular widgets ready to be used with any CSS framework. (Bootstrap, Material, SemanticUI, etc.)
