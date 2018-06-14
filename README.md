@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/dekoding/ngx-bearbones/Adding-logo/bearbones.png | width=100)
+<img src="https://raw.githubusercontent.com/dekoding/ngx-bearbones/Adding-logo/bearbones.png" style="width: 110px;"/>
 # Ngx-Bearbones
 
 A project to create bare-bones Angular widgets ready to be used with any CSS framework. (Bootstrap, Material, SemanticUI, etc.)
