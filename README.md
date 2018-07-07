@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/dekoding/ngx-bearbones/bearbones.png" style="width: 110px;"/>
+<img src="https://raw.githubusercontent.com/dekoding/ngx-bearbones/develop/bearbones.png" style="width: 110px;"/>
 
 # Ngx-Bearbones
 
