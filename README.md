@@ -215,6 +215,8 @@ For each tabset, use `bbactive=true` to indicate the default open tab.
 |--- |--- |--- |-- |
 |**bbtabcontent**|Turns any element into a tab. Requires a value, which must match `bbtab` for the associated tab.|string|yes|
 |**bbtabset**|Specify the tabset each tab belongs to|string|yes|
+|**bbdisplaystyle**|Specify the visible display style. Not compatible with `bbhiddenclass`. Defaults is 'block'|string|no|
+|**bbhiddenclass**|Specify the class to apply on hiding. Not compatible with `bbdisplaystyle`. Default is undefined.|string|no|
 
 ##### Event Emitters
 

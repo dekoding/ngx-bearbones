@@ -122,6 +122,8 @@ export class BBTabContentDirective implements OnInit, DoCheck {
 
     @Input('bbtabcontent') name: string;
     @Input('bbtabset') tabset: string;
+    @Input('bbdisplaystyle') style: string;
+    @Input('bbhiddenclass') hiddenclass: string;
 
     ngOnInit() {
         this.setVisibility();
@@ -132,7 +134,19 @@ export class BBTabContentDirective implements OnInit, DoCheck {
     }
 
     setVisibility() {
-        let display = this.bbService.tabsets[this.tabset].activeTab === this.name ? 'block' : 'none';
-        this.renderer.setStyle(this.el.nativeElement, 'display', display);
+        const style = this.style ? this.style : 'block';
+        const hiddenclass = this.hiddenclass || null;
+
+        const visible = this.bbService.tabsets[this.tabset].activeTab === this.name ? true : false;
+        if (hiddenclass) {
+            if (visible) {
+                this.renderer.removeClass(this.el.nativeElement, hiddenclass);
+            } else {
+                this.renderer.addClass(this.el.nativeElement, hiddenclass);
+            }
+        } else {
+            const display = visible ? style : 'none';
+            this.renderer.setStyle(this.el.nativeElement, 'display', display);
+        }
     }
 }
